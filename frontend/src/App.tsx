@@ -14,6 +14,8 @@ import SubjectReview from "./pages/SubjectReview";
 import Dashboard from "./pages/Dashboard";
 import NcertLibrary from "./pages/NcertLibrary";
 import SubjectHub from "./pages/SubjectHub";
+import QuizCenter from "./pages/QuizCenter";
+import QuizPage from "./pages/QuizPage";
 import { OnboardingProvider } from "./context/OnboardingContext";
 
 function App() {
@@ -77,6 +79,15 @@ function App() {
 <Route
   path="/subject/:subjectName"
   element={<SubjectHub />}
+/>
+
+<Route
+  path="/quiz-center"
+  element={<QuizCenter />}
+/>
+<Route
+  path="/quiz/:chapterId"
+  element={<QuizPage />}
 />
 
         </Routes>
