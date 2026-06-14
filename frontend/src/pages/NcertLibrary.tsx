@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import toast from "react-hot-toast";
 
 import { supabase } from "../lib/supabase";
@@ -84,7 +83,7 @@ function NcertLibrary() {
         </h1>
 
         <p className="text-zinc-400 mb-8">
-          Books recommended for your subjects
+          Personalized resources based on your subjects
         </p>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -93,7 +92,7 @@ function NcertLibrary() {
             <BookCard
               key={book.subject}
               title={book.title}
-              url={book.url}
+              subject={book.subject}
             />
           ))}
 

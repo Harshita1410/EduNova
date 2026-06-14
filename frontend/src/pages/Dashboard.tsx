@@ -9,6 +9,7 @@ import {
   Trophy,
   Flame,
   Compass,
+  LogOut,
 } from "lucide-react";
 
 import { supabase } from "../lib/supabase";
@@ -52,6 +53,19 @@ function Dashboard() {
     }
   };
 
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+
+    toast.success("Logged out successfully");
+
+    navigate("/login");
+  };
+
   useEffect(() => {
     loadProfile();
   }, []);
@@ -80,17 +94,37 @@ function Dashboard() {
     <div className="bg-zinc-950 min-h-screen p-6">
       <div className="max-w-6xl mx-auto">
 
-        <div className="bg-zinc-900 rounded-3xl p-8 mb-6">
-          <h1 className="text-white text-4xl font-bold mb-2">
-            Welcome Buddy 👋
-          </h1>
+        {/* Hero Card */}
 
-          <p className="text-zinc-400 text-lg">
-            {profile.class}
-            {profile.stream && ` • ${profile.stream}`}
-            {profile.combination && ` • ${profile.combination}`}
-          </p>
+        <div className="bg-zinc-900 rounded-3xl p-8 mb-6">
+
+          <div className="flex justify-between items-start">
+
+            <div>
+              <h1 className="text-white text-4xl font-bold mb-2">
+                Welcome Buddy 👋
+              </h1>
+
+              <p className="text-zinc-400 text-lg">
+                {profile.class}
+                {profile.stream && ` • ${profile.stream}`}
+                {profile.combination && ` • ${profile.combination}`}
+              </p>
+            </div>
+
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl text-white"
+            >
+              <LogOut size={18} />
+              Logout
+            </button>
+
+          </div>
+
         </div>
+
+        {/* Quick Actions */}
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
 
@@ -143,11 +177,13 @@ function Dashboard() {
 
         </div>
 
+        {/* Stats */}
+
         <div className="grid md:grid-cols-2 gap-6 mb-6">
 
           <div className="bg-zinc-900 p-6 rounded-2xl">
-            <div className="flex items-center gap-3 mb-3">
 
+            <div className="flex items-center gap-3 mb-3">
               <Trophy
                 size={28}
                 className="text-yellow-400"
@@ -166,8 +202,8 @@ function Dashboard() {
           </div>
 
           <div className="bg-zinc-900 p-6 rounded-2xl">
-            <div className="flex items-center gap-3 mb-3">
 
+            <div className="flex items-center gap-3 mb-3">
               <Flame
                 size={28}
                 className="text-orange-400"
@@ -186,6 +222,8 @@ function Dashboard() {
           </div>
 
         </div>
+
+        {/* Subjects */}
 
         <div className="bg-zinc-900 p-6 rounded-2xl">
 

@@ -22,12 +22,33 @@ function Login() {
       return;
     }
 
-    console.log(data);
+    const user = data.user;
+
+    if (!user) {
+      toast.error("User not found");
+      return;
+    }
+
+    const { data: profile, error: profileError } =
+      await supabase
+        .from("profiles")
+        .select("*")
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+    if (profileError) {
+      toast.error(profileError.message);
+      return;
+    }
 
     toast.success("Login successful!");
 
     setTimeout(() => {
-      navigate("/class-selection");
+      if (profile) {
+        navigate("/dashboard");
+      } else {
+        navigate("/class-selection");
+      }
     }, 1000);
   };
 

@@ -13,6 +13,7 @@ import OptionalSubjectSelection from "./pages/OptionalSubjectSelection";
 import SubjectReview from "./pages/SubjectReview";
 import Dashboard from "./pages/Dashboard";
 import NcertLibrary from "./pages/NcertLibrary";
+import SubjectHub from "./pages/SubjectHub";
 import { OnboardingProvider } from "./context/OnboardingContext";
 
 function App() {
@@ -71,6 +72,11 @@ function App() {
 <Route
   path="/ncert-library"
   element={<NcertLibrary />}
+/>
+
+<Route
+  path="/subject/:subjectName"
+  element={<SubjectHub />}
 />
 
         </Routes>

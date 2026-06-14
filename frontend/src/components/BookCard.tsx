@@ -1,14 +1,17 @@
+import { useNavigate } from "react-router-dom";
 import { BookOpen } from "lucide-react";
 
 type BookCardProps = {
   title: string;
-  url: string;
+  subject: string;
 };
 
 function BookCard({
   title,
-  url,
+  subject,
 }: BookCardProps) {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-zinc-900 p-6 rounded-2xl">
 
@@ -21,14 +24,14 @@ function BookCard({
         {title}
       </h2>
 
-      <a
-        href={url}
-        target="_blank"
-        rel="noreferrer"
-        className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-xl inline-block"
+      <button
+        onClick={() =>
+          navigate(`/subject/${subject}`)
+        }
+        className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-xl"
       >
-        Open Book
-      </a>
+        Open Subject Hub
+      </button>
 
     </div>
   );
